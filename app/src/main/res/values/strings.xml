@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Wigilabs</string>
+    <string name="search_message_error">Ocurrrio un error, vuelve a intertarlo.</string>
+    <string name="btn_retry">Volver a intentar</string>
+
+    <string name="movie_title_original">Titulo original: %s</string>
+    <string name="movie_vote">votación: %s</string>
+</resources>
