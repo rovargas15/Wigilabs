@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
 import coil.request.ImageRequest.Builder
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -28,12 +29,17 @@ enum class TypeImage(val value: String) {
 }
 
 @Composable
-fun LoadImage(url: String, type: TypeImage, modifier: Modifier = Modifier) {
+fun LoadImage(
+    url: String,
+    type: TypeImage,
+    modifier: Modifier = Modifier
+) {
     val urlBase = stringResource(id = R.string.base_url_image, type.value)
     AsyncImage(
         model = Builder(LocalContext.current)
             .data(urlBase + url)
             .crossfade(true)
+            .memoryCachePolicy(CachePolicy.ENABLED)
             .build(),
         placeholder = painterResource(R.drawable.ic_placeholder_movie),
         contentDescription = null,

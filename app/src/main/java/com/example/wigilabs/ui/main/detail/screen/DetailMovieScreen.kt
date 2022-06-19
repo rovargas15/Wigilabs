@@ -119,20 +119,25 @@ fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
 
         LoadImage(
             url = movie.backdropPath, type = TypeImage.Large,
-            modifier = Modifier.height(
-                LocalDimensions.current.imageMedium
-            ).constrainAs(header) {}
+            modifier = Modifier
+                .height(
+                    LocalDimensions.current.imageMedium
+                )
+                .constrainAs(header) {}
         )
 
         LoadImage(
             url = movie.posterPath, type = TypeImage.Medium,
-            modifier = Modifier.height(
-                LocalDimensions.current.heightMedium
-            ).width(LocalDimensions.current.imageSmall).constrainAs(poster) {
-                top.linkTo(header.bottom)
-                bottom.linkTo(header.bottom)
-                start.linkTo(header.start, 10.dp)
-            }
+            modifier = Modifier
+                .height(
+                    LocalDimensions.current.heightMedium
+                )
+                .width(LocalDimensions.current.imageSmall)
+                .constrainAs(poster) {
+                    top.linkTo(header.bottom)
+                    bottom.linkTo(header.bottom)
+                    start.linkTo(header.start, 10.dp)
+                }
         )
 
         Text(
@@ -166,7 +171,8 @@ fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
                 Text(
                     text = movie.voteAverage.toString(),
                     style = Typography.titleLarge,
-                    modifier = Modifier.padding(start = LocalDimensions.current.paddingMedium)
+                    modifier = Modifier
+                        .padding(start = LocalDimensions.current.paddingMedium)
                         .constrainAs(vote) {
                             start.linkTo(parent.start)
                         }

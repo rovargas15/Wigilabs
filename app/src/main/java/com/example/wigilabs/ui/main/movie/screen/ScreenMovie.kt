@@ -89,7 +89,9 @@ fun ManagerMovieState(
     modifier: Modifier,
     onSelectMovie: (Movie) -> Unit
 ) {
-    val movieViewModel: MovieViewModel = hiltViewModel()
+    val movieViewModel: MovieViewModel = hiltViewModel<MovieViewModel>().apply {
+        process(MovieEvent.GetMovieALl)
+    }
     val onEvent: (MovieEvent) -> Unit = { event: MovieEvent ->
         movieViewModel.process(event)
     }

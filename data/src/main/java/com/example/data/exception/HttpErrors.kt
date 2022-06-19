@@ -7,8 +7,8 @@ import com.example.domain.exception.InternalErrorException
 import com.example.domain.exception.NotFoundException
 import com.example.domain.exception.Unauthorized
 import com.example.domain.exception.UnknownError
+import org.json.JSONException
 import retrofit2.HttpException
-import java.text.ParseException
 import javax.net.ssl.HttpsURLConnection
 
 class HttpErrors {
@@ -33,7 +33,7 @@ class HttpErrors {
             var jsonString = exception.response()?.errorBody()?.string()
             if (jsonString.isNullOrEmpty()) jsonString = "{}"
             DomainException(jsonString)
-        } catch (exception: Exception) {
+        } catch (exception: JSONException) {
             UnknownError(exception.message ?: String())
         }
     }

@@ -45,8 +45,8 @@ class MovieViewModel @Inject constructor(
     private fun getMovie() {
         getMovieUC.invoke().map { result: Result<List<Movie>> ->
             result.fold(
-                onSuccess = { users: List<Movie> ->
-                    _viewState.postValue(MovieState.Success(users))
+                onSuccess = { movies: List<Movie> ->
+                    _viewState.postValue(MovieState.Success(movies))
                 },
                 onFailure = {
                     _viewState.postValue(MovieState.Error)
