@@ -1,8 +1,7 @@
-package com.app.wigilabs.di.db
+package com.example.wigilabs.di.db
 
 import com.example.data.local.db.AppDatabase
 import com.example.data.local.db.MovieDao
-import com.example.wigilabs.di.db.DatabaseModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

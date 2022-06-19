@@ -1,4 +1,4 @@
-package com.app.wigilabs.runner
+package com.example.wigilabs.runner
 
 import android.app.Application
 import android.content.Context

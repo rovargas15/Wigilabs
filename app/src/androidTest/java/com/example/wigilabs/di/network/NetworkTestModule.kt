@@ -1,6 +1,5 @@
-package com.app.wigilabs.di.network
+package com.example.wigilabs.di.network
 
-import com.example.wigilabs.di.network.NetworkModule
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

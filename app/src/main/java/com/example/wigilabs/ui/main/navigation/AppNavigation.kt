@@ -13,6 +13,7 @@ import com.example.domain.model.Movie
 import com.example.wigilabs.ui.main.detail.screen.DetailMovieScreen
 import com.example.wigilabs.ui.main.detail.viewmodel.DetailMovieViewModel
 import com.example.wigilabs.ui.main.movie.screen.ScreenMovie
+import com.example.wigilabs.ui.main.movie.viewmodel.MovieViewModel
 import com.example.wigilabs.ui.utils.hiltViewModel
 
 @Composable
@@ -32,7 +33,8 @@ fun NavGraphBuilder.mainGraph(
 ) {
     navigation(startDestination = Route.MOVIE, route = Graph.MAIN_GRAPH) {
         composable(route = Route.MOVIE) {
-            ScreenMovie() { movie: Movie ->
+            val movieViewModel: MovieViewModel = hiltViewModel()
+            ScreenMovie(movieViewModel) { movie: Movie ->
                 navController.navigate("${Route.MOVIE_DETAIL}${movie.id}")
             }
         }

@@ -25,7 +25,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -48,12 +47,14 @@ import com.example.wigilabs.ui.theme.LocalDimensions
 import com.example.wigilabs.ui.theme.PrimaryColor
 import com.example.wigilabs.ui.theme.Typography
 import com.example.wigilabs.ui.theme.colorLightBackground
-import com.example.wigilabs.ui.utils.hiltViewModel
-import kotlinx.coroutines.launch
 
 @Composable
-fun ScreenMovie(onSelectMovie: (Movie) -> Unit) {
+fun ScreenMovie(
+    movieViewModel: MovieViewModel,
+    onSelectMovie: (Movie) -> Unit
+) {
     TopBar(
+        movieViewModel = movieViewModel,
         onSelectMovie = onSelectMovie
     )
 }
@@ -61,6 +62,7 @@ fun ScreenMovie(onSelectMovie: (Movie) -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
+    movieViewModel: MovieViewModel,
     onSelectMovie: (Movie) -> Unit
 ) {
     Scaffold(
@@ -78,6 +80,7 @@ fun TopBar(
         }
     ) { paddingValues ->
         ManagerMovieState(
+            movieViewModel = movieViewModel,
             modifier = Modifier.padding(paddingValues),
             onSelectMovie = onSelectMovie,
         )
@@ -86,12 +89,10 @@ fun TopBar(
 
 @Composable
 fun ManagerMovieState(
+    movieViewModel: MovieViewModel,
     modifier: Modifier,
     onSelectMovie: (Movie) -> Unit
 ) {
-    val movieViewModel: MovieViewModel = hiltViewModel<MovieViewModel>().apply {
-        process(MovieEvent.GetMovieALl)
-    }
     val onEvent: (MovieEvent) -> Unit = { event: MovieEvent ->
         movieViewModel.process(event)
     }
@@ -197,7 +198,6 @@ fun ContentError(
     modifier: Modifier,
     onEvent: (MovieEvent) -> Unit
 ) {
-    val scope = rememberCoroutineScope()
     Column(
         modifier = modifier.fillMaxSize().testTag("ContentError"),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -214,9 +214,7 @@ fun ContentError(
 
         TextButton(
             onClick = {
-                scope.launch {
-                    onEvent(MovieEvent.Reload)
-                }
+                onEvent(MovieEvent.Reload)
             }
         ) {
             Text(
