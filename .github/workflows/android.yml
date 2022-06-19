@@ -28,12 +28,21 @@ jobs:
       - name: Run gradle tests
         run: ./gradlew test --stacktrace
 
-  Test_UI:
+  instrumentation:
+
+    needs: [ build ]
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
       - name: Run gradle ui test
         uses: reactivecircus/android-emulator-runner@v2
         with:
