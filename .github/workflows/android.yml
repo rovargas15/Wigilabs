@@ -26,10 +26,12 @@ jobs:
       run: ./gradlew build
     - name: Run gradle tests
       run: ./gradlew test --stacktrace
-       # The test results are shown as a webpage instead of on the command line
-    - name: Upload Reports
-      if: always() # show reports even if the previous steps fail
-      uses: actions/upload-artifact@v3
+    - name: run tests
+      uses: reactivecircus/android-emulator-runner@v2
       with:
-          name: reports-${{ matrix.api-level }}-${{ strategy.job-index }}
-          path: ${{ matrix.dir }}/app/build/reports
+          api-level: 30
+          target: default
+          arch: x86_64
+          profile: Nexus 6
+          script: ./gradlew connectedCheck
+    
