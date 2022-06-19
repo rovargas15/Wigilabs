@@ -28,7 +28,7 @@ jobs:
       - name: Run gradle tests
         run: ./gradlew test --stacktrace
 
-  instrumentation:
+  ui:
 
     needs: [ build ]
 
@@ -52,7 +52,7 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedCheck
 
-  name: Sonar
+  name: sonar
 
     runs-on: ubuntu-latest
 
@@ -81,4 +81,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonarqube --info
-
