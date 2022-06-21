@@ -115,7 +115,7 @@ fun ManagerDetailMovieState(
 @Composable
 fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
     ConstraintLayout(modifier = modifier) {
-        val (header, poster, title, voteCnl, overview) = createRefs()
+        val (header, poster, title, date, voteCnl, overview) = createRefs()
 
         LoadImage(
             url = movie.backdropPath, type = TypeImage.Large,
@@ -141,7 +141,7 @@ fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
         )
 
         Text(
-            text = movie.originalTitle,
+            text = movie.title,
             style = Typography.titleLarge,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
@@ -155,8 +155,18 @@ fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
                 },
         )
 
+        Text(
+            text = movie.releaseDate,
+            style = Typography.bodyMedium,
+            modifier = Modifier.constrainAs(date) {
+                start.linkTo(title.start, 10.dp)
+                top.linkTo(title.bottom)
+            }
+        )
+
         Row(
             modifier = Modifier
+                .padding(top = LocalDimensions.current.paddingMedium)
                 .constrainAs(voteCnl) {
                     top.linkTo(poster.bottom, 10.dp)
                     start.linkTo(poster.start)
@@ -191,7 +201,7 @@ fun ShowDetailMovie(movie: Movie, modifier: Modifier) {
             }
 
             Text(
-                text = movie.releaseDate,
+                text = movie.popularity.toString(),
                 style = Typography.titleLarge,
                 modifier = Modifier.padding(start = LocalDimensions.current.paddingMedium)
             )
