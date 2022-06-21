@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes.each {
+        it.buildConfigField 'String', 'KEY', KEY_API
+    }
+
     buildTypes {
         release {
             minifyEnabled false
